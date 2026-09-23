@@ -3,3 +3,20 @@ title: "awu3_project1"
 format: html
 editor: visual
 ---
+
+## Goal/Summary
+
+-   The goal of this project is to write functions to manipulate and process data sets from the census API. This will be done with generic functions to summarize and plot data. Then these will be used to give examples of using functions which will be displayed on a github page.
+
+### Data
+
+-   First we will query census api data and save data for years 2021-2024 as list in 4 different files.
+
+    ```{r}
+    source("./functions/get_data.R")
+
+    for (i in 2021:2024 ) {
+      data <- get_data(i)
+      saveRDS(data, file = paste0("data/", i, "_data.rds"))
+    }
+    ```
