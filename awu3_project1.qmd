@@ -19,4 +19,33 @@ editor: visual
       data <- get_data(i)
       saveRDS(data, file = paste0("data/", i, "_data.rds"))
     }
+
+
     ```
+
+    ```{r}
+    source("get_data.R")
+    data <- get_census_data()
+    data
+
+    years <- c(2021, 2022, 2023)
+    get_mult_years(year = years)
+    ```
+
+```{r}
+source("get_data.R")
+
+var_info_2024 <- readRDS("data/2024_data.rds")
+str(var_info_2024$JWAP$values$item)
+
+url <- "https://api.census.gov/data/2024/acs/acs1/pums?get=JWAP,PWGTP&for=state:37&key=0065bb939f5c09eb016d3f55ea5f5522c49679e4"
+resp <- GET(url)
+raw <- convert_to_tibble(resp)
+unique(raw$JWAP)[1:10]
+
+labels <- unlist(var_info_2024$JWAP$values$item)[raw$JWAP]
+parse_time_midpoint(unname(labels))
+```
+
+```{}
+```
